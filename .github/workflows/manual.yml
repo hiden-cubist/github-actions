@@ -4,11 +4,11 @@ on:
     inputs:
       greeting:
         type: string
-        description: Hello
+        default: Hello
         required: true
-        default: A cheerful word
+        description: A cheerful word
 jobs:
-  hello:
+  run:
     runs-on: ubuntu-latest
     steps:
       - run: echo "${{ inputs.greeting }}"
