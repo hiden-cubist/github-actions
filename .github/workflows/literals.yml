@@ -20,3 +20,8 @@ jobs:
           JOIN_FUNC: ${{ join(github.event.*.html_url, ', ') }}
           TO_JSON_FUNC: ${{ toJson(github.event) }}
           HASH_FILES_FUNC: ${{ hashFiles('.github/workflows/*.yml') }}
+      - run: echo "Hello"
+        if: ${{contains(github.run_id, '1') }}
+      - run: exit 1
+      - run: echo "World"
+        if: ${{ failure() }}
