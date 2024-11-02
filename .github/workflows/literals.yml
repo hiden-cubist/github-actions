@@ -2,17 +2,20 @@ name: Literals
 on: push
 jobs:
   print:
-    if: ${{ github.actor == 'octocat' }}
+    # if: ${{ github.actor == 'octocat' }}
+    name: Print Literals And Functions
     runs-on: ubuntu-latest
     steps:
-      - run: printenv | grep 'LITERAL_'
+      - name: Print Literals
+        run: printenv | grep 'LITERAL_'
         env:
           LITERAL_NULL: ${{ null }}
           LITERAL_BOOLEAN: ${{ true }}
           LITERAL_NUMBER: ${{ 1234 }}
           LITERAL_STRING: ${{ 'Hello' }}
           LITERAL_OMIT_STRING: World
-      - run: printenv | grep '_FUNC'
+      - name: Print Functions
+        run: printenv | grep '_FUNC'
         env:
           CONTAINS_FUNC: ${{ contains('Hello', 'ell') }}
           STARTS_WITH_FUNC: ${{ startsWith('Hello', 'He') }}
@@ -21,8 +24,10 @@ jobs:
           JOIN_FUNC: ${{ join(github.event.*.html_url, ', ') }}
           TO_JSON_FUNC: ${{ toJson(github.event) }}
           HASH_FILES_FUNC: ${{ hashFiles('.github/workflows/*.yml') }}
-      - run: echo "Hello"
+      - name: Print Hello
+        run: echo "Hello"
         if: ${{contains(github.run_id, '1') }}
-      - run: exit 1
-      - run: echo "World"
+      # - run: exit 1
+      - name: Print World if Failure
+        run: echo "World"
         if: ${{ failure() }}
