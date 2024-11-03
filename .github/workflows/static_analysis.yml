@@ -1,0 +1,14 @@
+name: Static analysis
+on:
+  pull_request:
+    paths: ['.github/workflows/*.yml', '.github/workflows/*.yaml']
+defaults:
+  run:
+    shell: bash
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: sleep 120
+      - uses: actions/checkout@v4

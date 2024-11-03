@@ -7,14 +7,3 @@ jobs:
       ACTOR: ${{ github.actor }}
     steps:
       - run: echo "${ACTOR}"
-      - run: echo "${{ github.run_id }}"
-      - run: echo "${{ github.head_ref }}"
-      - run: echo "${{ github.workspace }}"
-      - run: echo "${{ github.repository }}"
-      - run: echo "${{ github.repository_owner }}"
-      - run: echo "${{ github.event }}"
-      - run: echo "${{ runner.name }}"
-      - run: echo "${{ runner.os }}"
-      - run: echo "${{ runner.arch }}"
-      - run: echo "${{ runner.temp }}"
-      - run: echo "${{ runner.tool_cache }}"
