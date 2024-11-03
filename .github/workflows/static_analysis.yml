@@ -7,13 +7,12 @@ defaults:
     shell: bash
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  # cancel-in-progress: true
+  cancel-in-progress: true
 jobs:
   lint:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - run : sleep 120
       - uses: actions/checkout@v4
       - run: |
           docker run --rm -v "$(pwd):$(pwd)" -w "$(pwd)" rhysd/actionlint:latest
