@@ -4,7 +4,7 @@ jobs:
   hello:
     runs-on: ubuntu-latest
     env:
-      PASSWORD: SuperSecretValue
+      SECRETVALUE: SuperSecretValue
     steps:
       - run: echo "::debug::This is a debug log"
       - run: |
@@ -19,6 +19,6 @@ jobs:
           pwd
           echo "::endgroup::"
           echo "::group::Show secrets"
-          echo "::add-mask::${PASSWORD}"
+          echo "::add-mask::${SECRETVALUE}"
           echo "::endgroup::"
-      - run: echo "${PASSWORD}"
+      - run: echo "${SECRETVALUE}"
