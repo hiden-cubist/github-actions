@@ -19,4 +19,10 @@ jobs:
           pwd
           echo "::endgroup::"
       - run: echo "::add-mask::${SECRETVALUE}"
-      - run: echo "${SECRETVALUE}"
+      - run: echo "::error::This is an error message"
+      - run: echo "::warning::This is a warning message"
+      - run: echo "::notice::This is a notice message"
+      - run: |
+          echo "## Example Title :rocket:" >> "${GITHUB_STEP_SUMMARY}"
+          echo "- first line" >> "${GITHUB_STEP_SUMMARY}"
+          echo "- second line" >> "${GITHUB_STEP_SUMMARY}"
