@@ -1,0 +1,13 @@
+name: Comment
+on: pull_request
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    # https://docs.github.com/ja/rest/pulls/comments?apiVersion=2022-11-28#create-a-review-comment-for-a-pull-request
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: gh pr comment "${GITHUB_HEAD_REF}" --body "Hello, ${GITHUB_ACTOR}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

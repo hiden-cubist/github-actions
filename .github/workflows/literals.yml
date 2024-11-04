@@ -10,7 +10,6 @@ jobs:
       - name: Print Literals
         run: printenv | grep 'LITERAL_'
         env:
-          LITERAL_NULL: ${{ null }}
           LITERAL_BOOLEAN: ${{ true }}
           LITERAL_NUMBER: ${{ 1234 }}
           LITERAL_STRING: ${{ 'Hello' }}
@@ -22,7 +21,7 @@ jobs:
           STARTS_WITH_FUNC: ${{ startsWith('Hello', 'He') }}
           ENDS_WITH_FUNC: ${{ endsWith('Hello', 'lo') }}
           FORMAT_FUNC: ${{ format('{0}, {1}!', 'Hello', 'World') }}
-          JOIN_FUNC: ${{ join(github.event.*.html_url, ', ') }}
+          JOIN_FUNC: ${{ join(github.event.commits.message, ', ') }}
           TO_JSON_FUNC: ${{ toJson(github.event) }}
           HASH_FILES_FUNC: ${{ hashFiles('.github/workflows/*.yml') }}
       - name: Print Hello

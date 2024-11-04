@@ -1,0 +1,28 @@
+name: Debug log
+on: push
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    env:
+      SECRETVALUE: SuperSecretValue
+    steps:
+      - run: echo "::debug::This is a debug log"
+      - run: |
+          set -x
+          date
+          hostname
+      - run: |
+          echo "::group::Show environment variables"
+          printenv
+          echo "::endgroup::"
+          echo "::group::Show current directory"
+          pwd
+          echo "::endgroup::"
+      - run: echo "::add-mask::${SECRETVALUE}"
+      - run: echo "::error::This is an error message"
+      - run: echo "::warning::This is a warning message"
+      - run: echo "::notice::This is a notice message"
+      - run: |
+          echo "## Example Title :rocket:" >> "${GITHUB_STEP_SUMMARY}"
+          echo "- first line" >> "${GITHUB_STEP_SUMMARY}"
+          echo "- second line" >> "${GITHUB_STEP_SUMMARY}"
