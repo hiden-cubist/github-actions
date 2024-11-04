@@ -3,9 +3,22 @@ on: push
 jobs:
   hello:
     runs-on: ubuntu-latest
+    env:
+      PASSWORD: SuperSecretValue
     steps:
       - run: echo "::debug::This is a debug log"
       - run: |
           set -x
           date
           hostname
+      - run: |
+          echo "::group::Show environment variables"
+          printenv
+          echo "::endgroup::"
+          echo "::group::Show current directory"
+          pwd
+          echo "::endgroup::"
+          echo "::group::Show secrets"
+          echo "::add-mask::${PASSWORD}"
+          echo "${PASSWORD}"
+          echo "::endgroup::"
