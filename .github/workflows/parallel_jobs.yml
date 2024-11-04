@@ -4,12 +4,17 @@ jobs:
   first:
     runs-on: ubuntu-latest
     steps:
-      - run: sleep 10 && echo "First job"
+      - id: generate
+        run: echo "result=Hello" >>"${GITHUB_OUTPUT}"
+    outputs:
+      result: ${{ steps.generate.outputs.result }}
   second:
     runs-on: ubuntu-latest
     needs: [first]
     steps:
-      - run: sleep 10 && echo "Second job"
+      - env:
+          RESULT: ${{ needs.first.outputs.result }}
+        run: echo "${RESULT}"
   third:
     runs-on: ubuntu-latest
     steps:
