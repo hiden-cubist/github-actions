@@ -20,7 +20,14 @@ jobs:
     steps:
       - run: sleep 10 && echo "Third job"
   fourth:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        version: [18, 20]
+    runs-on: ${{ matrix.os }}
     needs: [second, third]
     steps:
-      - run: sleep 10 && echo "Fourth job"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.version }}
+      - run: echo "${RUNNER_OS}" && node --version
