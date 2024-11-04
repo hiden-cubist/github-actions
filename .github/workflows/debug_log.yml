@@ -20,5 +20,5 @@ jobs:
           echo "::endgroup::"
           echo "::group::Show secrets"
           echo "::add-mask::${PASSWORD}"
-          echo "${PASSWORD}"
           echo "::endgroup::"
+      - run: echo "${PASSWORD}"
