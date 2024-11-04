@@ -18,7 +18,5 @@ jobs:
           echo "::group::Show current directory"
           pwd
           echo "::endgroup::"
-          echo "::group::Show secrets"
-          echo "::add-mask::${SECRETVALUE}"
-          echo "::endgroup::"
+      - run: echo "::add-mask::${SECRETVALUE}"
       - run: echo "${SECRETVALUE}"
