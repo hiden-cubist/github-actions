@@ -13,7 +13,7 @@ jobs:
         id: dump
         uses: ./.github/actions/dump/
         with:
-          enable-context: 'true'
+          enable-context: 'false'
       - name: show date
         run: echo "${DATE}"
         env:
