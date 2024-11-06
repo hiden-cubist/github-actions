@@ -7,11 +7,14 @@ jobs:
   debug:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/dump/
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: dump
         id: dump
+        uses: ./.github/actions/dump/
         with:
           enable-context: 'true'
-      - run: echo "${DATE}"
+      - name: show date
+        run: echo "${DATE}"
         env:
           DATE: ${{ steps.dump.outputs.dumped-date }}

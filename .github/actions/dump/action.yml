@@ -15,14 +15,21 @@ runs:
   using: composite
   steps:
     - name: dump-env
-      run: printenv | sort
+      run: |
+        echo "::group::Environment Variables"
+        printenv | sort
+        echo "::endgroup::"
       shell: bash
     - name: dump-context
       if: ${{ inputs.enable-context == 'true' }}
-      run: echo "${GITHUB_CONTEXT}"
+      run: |
+        echo "::group::GitHub Context"
+        echo "${GITHUB_CONTEXT}"
+        echo "::endgroup::"
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       shell: bash
     - name: current
+      id: current
       run: echo "date=$(date)" >> "${GITHUB_OUTPUT}"
       shell: bash
